@@ -160,17 +160,34 @@ cd dsh-86-startup
 
 ### Windows
 
-同样的三步，路径换成：
+前置：Windows 10/11、DSH 桌面版、Node 22+、pnpm（`npm install -g pnpm`，或使用 DSH 自带的 pnpm）。
 
 ```powershell
-cd "$env:USERPROFILE\.dsh\profiles\desktop"
-pnpm add link:"$env:USERPROFILE\Documents\plugins\dsh-86-startup"
-notepad "$env:USERPROFILE\.dsh\profiles\desktop\package.json"
+git clone https://github.com/JonathanChang-alt/dsh-86-startup.git "$env:USERPROFILE\Documents\dsh-86-startup"
+cd "$env:USERPROFILE\Documents\dsh-86-startup"
+powershell -ExecutionPolicy Bypass -File .\install.ps1
+
+# web profile:
+# powershell -ExecutionPolicy Bypass -File .\install.ps1 -Profile web
 ```
 
-> **不要用 PowerShell 5.1 的 `Set-Content -Encoding UTF8` 手写这个 JSON** ——
-> 它会写入 UTF-8 BOM，DSH 的 `JSON.parse` 不接受 BOM，整个 profile 会起不来。
-> 用 VS Code / 记事本存成无 BOM UTF-8，或用 Node 改。
+`install.ps1` 会备份 profile、执行 `pnpm add "link:C:/..."`、把 `dsh-86-startup` 加进 `dsh.profile.bundles`，并用 Node 写入**无 BOM** 的 JSON。
+
+手动安装：
+
+```powershell
+$plugin  = "$env:USERPROFILE\Documents\dsh-86-startup"
+$profile = "$env:USERPROFILE\.dsh\profiles\desktop"
+
+cd $profile
+pnpm add "link:$($plugin -replace '\\','/')"
+# 然后用 VS Code 打开 $profile\package.json，把 "dsh-86-startup" 加进 dsh.profile.bundles
+```
+
+- 如果 DSH 的 home 不是 `%USERPROFILE%\.dsh`，先设置 `$env:DSH_HOME = "D:\dsh"`，`install.ps1` 会优先读它。
+- **不要用 PowerShell 5.1 的 `Set-Content -Encoding UTF8` 手写 JSON**：它会写 UTF-8 BOM，DSH 的 `JSON.parse` 不接受，profile 会起不来。用 `install.ps1`、VS Code 或 Node 改。
+- 插件本身是**纯 Web/Node**，同一份代码在 Windows 和 macOS 上跑；没有 mac 专用依赖，语音是内嵌 WAV，Windows 的 Electron 不需要额外编解码器。
+- 改完**完全退出 DeepSeek Harness，再打开**；只关窗口不生效。
 
 ## 设置
 
@@ -221,10 +238,14 @@ notepad "$env:USERPROFILE\.dsh\profiles\desktop\package.json"
 `preview/index.html` 是一个完全离线的预览页，不依赖 DSH，也不碰真实配置：
 
 ```bash
+# macOS
 open preview/index.html
+
+# Windows
+start preview\index.html
 ```
 
-- 左下角控制台可以改自动播放、速度、肖像、场景、HUD / 数据雨 / 网格，改完自动刷新。
+- 左下角控制台可以改自动播放、时长版本、语音、速度、肖像、场景、HUD / 数据雨 / 网格，改完自动刷新。
 - `?snap=1..7&ui=0` 会直接停在某一幕（1 锁标、2 接入、3 身份、4 链路、5 同步、6 频道、7 终幕），
   用来截图或对照设计稿；`ui=0` 顺便隐藏控制台。
 - `?auto=full|once|off` 覆盖自动播放，`&portrait=3&scene=rail` 覆盖画面；
@@ -238,7 +259,7 @@ open preview/index.html
 ```
 dsh-86-startup/
 ├── lib/
-│   ├── index.js     Host：注入首屏 + 4 个路由 + 配置持久化
+│   ├── index.js     Host：注入首屏 + 5 个路由 + 配置持久化
 │   ├── splash.js    浏览器端：六幕时间线、雷达、数据雨、音效、语音
 │   ├── splash.css   全部样式（e86b- 前缀）
 │   └── client.js    设置页「启动动画 · 第 86 区」+ 桌面端自举
@@ -250,7 +271,10 @@ dsh-86-startup/
 ├── test/
 │   ├── host.mjs     Host 侧冒烟（路由 / 配置 / 让位 / 路径穿越）
 │   └── shoot.mjs    CDP 截图工具（真实时间，非 virtual-time）
+├── install.sh        macOS / Linux 安装脚本
+├── install.ps1       Windows PowerShell 安装脚本
 ├── cordis.patch.yml
+├── LICENSE
 └── package.json
 ```
 
@@ -285,8 +309,18 @@ dsh-86-startup/
 
 ## 卸载
 
+**macOS / Linux**
+
 ```bash
 cd ~/.dsh/profiles/desktop
+pnpm remove dsh-86-startup
+# 再从 package.json 的 dsh.profile.bundles 里删掉 "dsh-86-startup"
+```
+
+**Windows**
+
+```powershell
+cd "$env:USERPROFILE\.dsh\profiles\desktop"
 pnpm remove dsh-86-startup
 # 再从 package.json 的 dsh.profile.bundles 里删掉 "dsh-86-startup"
 ```

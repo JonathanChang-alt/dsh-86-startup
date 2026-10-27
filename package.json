@@ -34,7 +34,8 @@
     "icon.svg",
     "README.md",
     "LICENSE",
-    "install.sh"
+    "install.sh",
+    "install.ps1"
   ],
   "dsh": {
     "bundle": {
