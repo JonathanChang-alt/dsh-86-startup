@@ -1,0 +1,326 @@
+[
+  {
+    "id": 1,
+    "name": "access",
+    "ja": "ハンドラー・ワンより、パラレイド接続を要請します。ゾーン・エイティシックス、応答を。",
+    "zh": "管制一号请求 Para-RAID 接入。第 86 区，请应答。",
+    "en": "Handler One requesting Para-RAID connection. Zone Eighty-Six, respond.",
+    "chosen": {
+      "seed": 7,
+      "duration": 5.185,
+      "score": 0.7667,
+      "leak": 0.3492,
+      "asr": "ハンドラー1よりパラレード接続を要請しますゾーン86応答を",
+      "wav": "_cand_1_7.wav",
+      "elapsed": 8.04
+    },
+    "candidates": [
+      {
+        "seed": 123,
+        "duration": 5.185,
+        "score": 0.7458,
+        "leak": 0.3548,
+        "asr": "ハンドラー1よりパラレード接続を要請しますゾーン86応答",
+        "wav": "_cand_1_123.wav",
+        "elapsed": 8.55
+      },
+      {
+        "seed": 1,
+        "duration": 2.865,
+        "score": 0.6792,
+        "leak": 0.3929,
+        "asr": "ハンドラ1よりパラレード接続を要請します",
+        "wav": "_cand_1_1.wav",
+        "elapsed": 8.05
+      },
+      {
+        "seed": 7,
+        "duration": 5.185,
+        "score": 0.7667,
+        "leak": 0.3492,
+        "asr": "ハンドラー1よりパラレード接続を要請しますゾーン86応答を",
+        "wav": "_cand_1_7.wav",
+        "elapsed": 8.04
+      },
+      {
+        "seed": 42,
+        "duration": 5.465,
+        "score": 0.7667,
+        "leak": 0.3492,
+        "asr": "ハンドラー1よりパラレード接続を要請しますゾーン86応答を",
+        "wav": "_cand_1_42.wav",
+        "elapsed": 8.24
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "identity",
+    "ja": "身分証明、確認しました。ハンドラー・ワン、ヴラディレーナ・ミリーゼ。権限レベル・スリー。",
+    "zh": "身份确认。管制一号，芙拉蒂蕾娜·米利杰。权限等级三。",
+    "en": "Identity confirmed. Handler One, Vladilena Milizé. Clearance level three.",
+    "chosen": {
+      "seed": 1,
+      "duration": 5.225,
+      "score": 0.9206,
+      "leak": 0.1471,
+      "asr": "身分証明確認しましたハンドラーワンブラディレーナミリーゼ権限レベル3",
+      "wav": "_cand_2_1.wav",
+      "elapsed": 7.84
+    },
+    "candidates": [
+      {
+        "seed": 123,
+        "duration": 4.445,
+        "score": 0.75,
+        "leak": 0.1967,
+        "asr": "身分証明確認しましたハンドラー1 ブラディレイナミ ゼ",
+        "wav": "_cand_2_123.wav",
+        "elapsed": 7.39
+      },
+      {
+        "seed": 1,
+        "duration": 5.225,
+        "score": 0.9206,
+        "leak": 0.1471,
+        "asr": "身分証明確認しましたハンドラーワンブラディレーナミリーゼ権限レベル3",
+        "wav": "_cand_2_1.wav",
+        "elapsed": 7.84
+      },
+      {
+        "seed": 7,
+        "duration": 4.185,
+        "score": 0.7857,
+        "leak": 0.1967,
+        "asr": "身分証明確認しましたハンドラー1 ブラディ・レーナ・ミリス",
+        "wav": "_cand_2_7.wav",
+        "elapsed": 7.54
+      },
+      {
+        "seed": 42,
+        "duration": 3.965,
+        "score": 0.7018,
+        "leak": 0.1935,
+        "asr": "身分証明確認しましたハンドラー1 ブラディレナミディぜ",
+        "wav": "_cand_2_42.wav",
+        "elapsed": 7.33
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "link",
+    "ja": "パラレイド、リンク確立。ゾーン・エイティシックス、回線を開放します。",
+    "zh": "Para-RAID 链路建立。第 86 区，回线开放。",
+    "en": "Para-RAID link established. Zone Eighty-Six, opening the channel.",
+    "chosen": {
+      "seed": 1,
+      "duration": 4.565,
+      "score": 0.8,
+      "leak": 0.339,
+      "asr": "パラレイド、リンク確立、ゾーン86、回線を開放します。",
+      "wav": "_cand_3_1.wav",
+      "elapsed": 7.72
+    },
+    "candidates": [
+      {
+        "seed": 123,
+        "duration": 4.465,
+        "score": 0.7347,
+        "leak": 0.3103,
+        "asr": "パラレードリンク確率、ゾーン86、回線を開放します。",
+        "wav": "_cand_3_123.wav",
+        "elapsed": 7.38
+      },
+      {
+        "seed": 1,
+        "duration": 4.565,
+        "score": 0.8,
+        "leak": 0.339,
+        "asr": "パラレイド、リンク確立、ゾーン86、回線を開放します。",
+        "wav": "_cand_3_1.wav",
+        "elapsed": 7.72
+      },
+      {
+        "seed": 7,
+        "duration": 4.765,
+        "score": 0.76,
+        "leak": 0.339,
+        "asr": "パラレイド、リンク確率、ゾーン86、回線を開放します。",
+        "wav": "_cand_3_7.wav",
+        "elapsed": 7.86
+      },
+      {
+        "seed": 42,
+        "duration": 4.665,
+        "score": 0.7347,
+        "leak": 0.3103,
+        "asr": "パラレード、リンク確率、ゾーン86、回線を開放します。",
+        "wav": "_cand_3_42.wav",
+        "elapsed": 8.14
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "sync",
+    "ja": "神経同期、九十八・四パーセント。同調、完了。",
+    "zh": "神经同步，98.4%。同调完成。",
+    "en": "Neural synchronization at ninety-eight point four percent. Synchronization complete.",
+    "chosen": {
+      "seed": 7,
+      "duration": 4.305,
+      "score": 0.5714,
+      "leak": 0.0,
+      "asr": "神経同期98.4%同調完了",
+      "wav": "_cand_4_7.wav",
+      "elapsed": 8.36
+    },
+    "candidates": [
+      {
+        "seed": 123,
+        "duration": 2.625,
+        "score": 0.3333,
+        "leak": 0.0,
+        "asr": "神経同期98.4%",
+        "wav": "_cand_4_123.wav",
+        "elapsed": 7.36
+      },
+      {
+        "seed": 1,
+        "duration": 2.545,
+        "score": 0.1667,
+        "leak": 0.0,
+        "asr": "神経動機98.4%",
+        "wav": "_cand_4_1.wav",
+        "elapsed": 7.6
+      },
+      {
+        "seed": 7,
+        "duration": 4.305,
+        "score": 0.5714,
+        "leak": 0.0,
+        "asr": "神経同期98.4%同調完了",
+        "wav": "_cand_4_7.wav",
+        "elapsed": 8.36
+      },
+      {
+        "seed": 42,
+        "duration": 4.105,
+        "score": 0.3571,
+        "leak": 0.0,
+        "asr": "神経動機98.4%動調完了",
+        "wav": "_cand_4_42.wav",
+        "elapsed": 8.99
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "channel",
+    "ja": "スピアヘッド、全機オンライン。通信チャンネルを開放します。",
+    "zh": "先锋战队，全机在线。通信频道开放。",
+    "en": "Spearhead, all units online. Opening the communications channel.",
+    "chosen": {
+      "seed": 1,
+      "duration": 3.805,
+      "score": 1.0,
+      "leak": 0.1905,
+      "asr": "スピアヘッド 全機オンライン 通信チャンネルを開放します",
+      "wav": "_cand_5_1.wav",
+      "elapsed": 10.12
+    },
+    "candidates": [
+      {
+        "seed": 123,
+        "duration": 3.885,
+        "score": 1.0,
+        "leak": 0.1905,
+        "asr": "スピアヘッド 全機オンライン 通信チャンネルを開放します",
+        "wav": "_cand_5_123.wav",
+        "elapsed": 10.63
+      },
+      {
+        "seed": 1,
+        "duration": 3.805,
+        "score": 1.0,
+        "leak": 0.1905,
+        "asr": "スピアヘッド 全機オンライン 通信チャンネルを開放します",
+        "wav": "_cand_5_1.wav",
+        "elapsed": 10.12
+      },
+      {
+        "seed": 7,
+        "duration": 4.085,
+        "score": 0.9231,
+        "leak": 0.1905,
+        "asr": "スピアヘッド 前期オンライン 通信チャンネルを開放します",
+        "wav": "_cand_5_7.wav",
+        "elapsed": 9.54
+      },
+      {
+        "seed": 42,
+        "duration": 3.805,
+        "score": 0.9231,
+        "leak": 0.1905,
+        "asr": "スピアヘッド 前期オンライン 通信チャンネルを開放します",
+        "wav": "_cand_5_42.wav",
+        "elapsed": 9.15
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "welcome",
+    "ja": "おかえりなさい、アンダーテイカー。……ずっと、待っていました。",
+    "zh": "欢迎回来，undertaker。……我一直，在等你。",
+    "en": "Welcome back, Undertaker. I've been waiting for you.",
+    "chosen": {
+      "seed": 1,
+      "duration": 3.185,
+      "score": 1.0,
+      "leak": 0.0667,
+      "asr": "おかえりなさい、アンダーテイカ。ずっと待っていました。",
+      "wav": "_cand_6_1.wav",
+      "elapsed": 6.48
+    },
+    "candidates": [
+      {
+        "seed": 123,
+        "duration": 1.705,
+        "score": 0.7222,
+        "leak": 0.04,
+        "asr": "おかえりなさい、アンダーテイカ",
+        "wav": "_cand_6_123.wav",
+        "elapsed": 7.3
+      },
+      {
+        "seed": 1,
+        "duration": 3.185,
+        "score": 1.0,
+        "leak": 0.0667,
+        "asr": "おかえりなさい、アンダーテイカ。ずっと待っていました。",
+        "wav": "_cand_6_1.wav",
+        "elapsed": 6.48
+      },
+      {
+        "seed": 7,
+        "duration": 1.665,
+        "score": 0.7222,
+        "leak": 0.04,
+        "asr": "おかえりなさい、アンダーテイカー",
+        "wav": "_cand_6_7.wav",
+        "elapsed": 5.93
+      },
+      {
+        "seed": 42,
+        "duration": 1.665,
+        "score": 0.7222,
+        "leak": 0.04,
+        "asr": "おかえりなさい、アンダーテイカ",
+        "wav": "_cand_6_42.wav",
+        "elapsed": 5.98
+      }
+    ]
+  }
+]

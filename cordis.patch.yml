@@ -1,0 +1,11 @@
+# dsh-86-startup — DSH bundle patch
+#
+# 把插件的 Host 半侧挂进当前 profile 的配置树；Web 半侧由 dsh.client 声明，
+# 宿主按 package.json 的 dsh.client 自动组装 bundle，这里不用写。
+#
+# 安装（不手改 profile patch）：
+#   dsh plugin --profile desktop add link:/path/to/dsh-86-startup
+#   # 然后把它加入 dsh.profile.bundles
+- insert:
+    - id: dsh-86-startup
+      name: dsh-86-startup

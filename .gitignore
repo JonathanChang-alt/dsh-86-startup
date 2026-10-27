@@ -1,0 +1,9 @@
+.DS_Store
+node_modules/
+*.log
+
+# build intermediate: the runtime copy is embedded in lib/splash.js
+assets/voice/voice-data.js
+
+# local screenshots from test/shoot.mjs (the docs images are tracked)
+test/shots/

@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dsh-86-startup · 第 86 区开机预览</title>
+<link rel="stylesheet" href="../lib/splash.css">
+<style>
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #02060c; }
+  body { font-family: "PingFang SC", "Hiragino Sans GB", system-ui, sans-serif; color: #e8f6ff; }
+
+  /* 揭幕之后露出来的假主界面，只为看清 handoff 的效果 */
+  #mock { position: fixed; inset: 0; z-index: 1; display: flex; background: #04080f; }
+  #mock .side { width: 248px; background: #050d17; border-right: 1px solid #123a5c; padding: 14px 12px; display: flex; flex-direction: column; gap: 6px; }
+  #mock .brand { display: flex; align-items: center; gap: 10px; padding-bottom: 12px; border-bottom: 1px solid #123a5c; margin-bottom: 8px; }
+  #mock .brand b { font-family: "Arial Black", sans-serif; font-size: 18px; letter-spacing: -.04em; color: #fff; }
+  #mock .brand span { font: 8px/1.4 ui-monospace, monospace; letter-spacing: .2em; color: #6d90ab; }
+  #mock .item { font-size: 13px; color: #9dc4dd; padding: 8px 9px; border-left: 2px solid transparent; }
+  #mock .item.on { color: #e8f6ff; background: rgba(63,182,255,.1); border-left-color: #3fb6ff; }
+  #mock .main { flex: 1; display: flex; flex-direction: column; }
+  #mock .top { height: 46px; border-bottom: 1px solid #123a5c; display: flex; align-items: center; justify-content: space-between; padding: 0 18px; font: 11px ui-monospace, monospace; letter-spacing: .14em; color: #6d90ab; }
+  #mock .body { flex: 1; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 12px; }
+  #mock .body h1 { margin: 0; font-size: 30px; font-weight: 600; letter-spacing: .3em; color: #e8f6ff; }
+  #mock .body p { margin: 0; font: 11px ui-monospace, monospace; letter-spacing: .34em; color: #6d90ab; }
+  #mock .composer { margin: 0 auto 34px; width: min(720px, 80%); height: 74px; border: 1px solid #1a5c8a; background: #071320; }
+
+  /* 预览控制台 */
+  #console {
+    position: fixed; left: 16px; bottom: 16px; width: 300px; z-index: 2147483700;
+    background: rgba(4, 12, 22, .94); border: 1px solid rgba(63, 182, 255, .35);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, .55), 0 0 26px rgba(63, 182, 255, .08);
+    font: 11px/1.5 ui-monospace, Menlo, Consolas, monospace; color: #9dc4dd;
+    backdrop-filter: blur(8px);
+  }
+  #console header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 8px 10px; border-bottom: 1px solid rgba(63, 182, 255, .22); color: #e8f6ff;
+    letter-spacing: .1em; font-size: 10px;
+  }
+  #console header b { color: #59e0ff; }
+  #console .pane { padding: 10px; display: flex; flex-direction: column; gap: 8px; max-height: 76vh; overflow: auto; }
+  #console label { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  #console label > span { color: #6d90ab; flex: 0 0 88px; }
+  #console select, #console input[type=range] { flex: 1; min-width: 0; }
+  #console select {
+    background: rgba(63, 182, 255, .08); color: #e8f6ff; border: 1px solid rgba(63, 182, 255, .3);
+    font: inherit; padding: 3px 5px; outline: none;
+  }
+  #console .row { display: flex; gap: 6px; }
+  #console button {
+    flex: 1; background: rgba(63, 182, 255, .1); color: #e8f6ff;
+    border: 1px solid rgba(63, 182, 255, .42); padding: 5px 8px; font: inherit; cursor: pointer;
+    letter-spacing: .1em;
+  }
+  #console button:hover { border-color: #59e0ff; box-shadow: 0 0 14px rgba(89, 224, 255, .25); }
+  #console .note { color: #4f738c; font-size: 10px; line-height: 1.6; }
+  #console.collapsed .pane { display: none; }
+</style>
+</head>
+<body>
+
+<div id="mock">
+  <aside class="side">
+    <div class="brand"><b>86</b><span>エイティシックス<br>ZONE 86</span></div>
+    <div class="item on">新会话</div>
+    <div class="item">任务看板</div>
+    <div class="item">插件</div>
+    <div class="item">自动化任务</div>
+    <div class="item">上下文洞察</div>
+  </aside>
+  <main class="main">
+    <div class="top"><span>第 86 区 · PARA-RAID</span><span>ZONE 86 · ONLINE</span></div>
+    <div class="body">
+      <h1>第 86 区</h1>
+      <p>PARA-RAID LINK ESTABLISHED</p>
+    </div>
+    <div class="composer"></div>
+  </main>
+</div>
+
+<div id="console">
+  <header><span><b>86</b> BOOT PREVIEW</span><span id="toggle" style="cursor:pointer">—</span></header>
+  <div class="pane">
+    <div class="row">
+      <button id="replay">重播</button>
+      <button id="skip">跳过</button>
+    </div>
+    <label><span>自动播放</span>
+      <select id="autoPlay">
+        <option value="full">完全自动</option>
+        <option value="once">点击一次</option>
+        <option value="off">前两步确认</option>
+      </select>
+    </label>
+    <label><span>时长版本</span>
+      <select id="length">
+        <option value="short">短版 · 19s</option>
+        <option value="long">长版 · 37s</option>
+      </select>
+    </label>
+    <label><span>速度</span><input id="speed" type="range" min="0.35" max="3" step="0.05"></label>
+    <label><span>AI 语音</span><input id="voice" type="checkbox"></label>
+    <label><span>肖像</span>
+      <select id="portrait">
+        <option value="-1">不显示</option>
+        <option value="0">00 原图</option>
+        <option value="1">01 素颜</option>
+        <option value="2">02 特写</option>
+        <option value="3">03 军帽</option>
+        <option value="4">04 侧光</option>
+      </select>
+    </label>
+    <label><span>场景</span>
+      <select id="scene">
+        <option value="rail">铁轨</option>
+        <option value="flowers">花海</option>
+        <option value="black">纯黑</option>
+      </select>
+    </label>
+    <label><span>HUD</span><input id="showHud" type="checkbox"></label>
+    <label><span>数据雨</span><input id="showHex" type="checkbox"></label>
+    <label><span>网格</span><input id="showGrid" type="checkbox"></label>
+    <div class="note">改动会写入 localStorage 并自动刷新；直接改这里只影响预览，不影响 DSH 里的真实配置。</div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var DEFAULTS = {
+    enabled: true,
+    mode: 'always',
+    length: 'short',
+    autoPlay: 'once',
+    speed: 1,
+    allowSkip: true,
+    sound: false,
+    soundVolume: 0.45,
+    voice: true,
+    voiceVolume: 0.8,
+    identity: 'HANDLER 01',
+    handlerName: 'VLADILENA MILIZÉ',
+    handlerNameZh: '芙拉蒂蕾娜·米利杰',
+    clearance: '3',
+    unit: 'M1A4 JUGGERNAUT',
+    squad: 'SPEARHEAD',
+    welcomeName: 'undertaker',
+    scene: 'rail',
+    portrait: 3,
+    showHud: true,
+    showHex: true,
+    showGrid: true,
+    finaleTitle: '第 86 区',
+    finaleSub: '不存在的战区',
+    finaleEn: 'THE NONEXISTENT WAR ZONE',
+    footer: 'ZONE 86 // PARA-RAID'
+  }
+
+  var saved = {}
+  try { saved = JSON.parse(localStorage.getItem('dsh86-preview') || '{}') || {} } catch (e) { saved = {} }
+  var cfg = Object.assign({}, DEFAULTS, saved)
+  cfg.enabled = true
+  cfg.mode = 'always'
+
+  /* 截图/录制用：?auto=full&portrait=3&scene=rail&speed=1&ui=0 */
+  try {
+    var params = new URLSearchParams(location.search)
+    if (params.get('auto')) cfg.autoPlay = params.get('auto')
+    if (params.get('length')) cfg.length = params.get('length')
+    if (params.get('portrait') != null) cfg.portrait = Number(params.get('portrait'))
+    if (params.get('scene')) cfg.scene = params.get('scene')
+    if (params.get('speed')) cfg.speed = Number(params.get('speed'))
+    if (params.get('ui') === '0') document.getElementById('console').style.display = 'none'
+    if (params.get('snap')) window.__DSH_86_STARTUP_SNAPSHOT__ = Number(params.get('snap'))
+  } catch (e) { /* 老浏览器 */ }
+
+  window.__DSH_86_STARTUP_ASSET_BASE__ = '../assets/'
+  window.__DSH_86_STARTUP__ = cfg
+
+  var ids = ['autoPlay', 'length', 'speed', 'portrait', 'scene', 'showHud', 'showHex', 'showGrid', 'voice']
+  function paint() {
+    document.getElementById('autoPlay').value = cfg.autoPlay
+    document.getElementById('length').value = cfg.length || 'short'
+    document.getElementById('speed').value = cfg.speed
+    document.getElementById('portrait').value = String(cfg.portrait)
+    document.getElementById('scene').value = cfg.scene
+    document.getElementById('showHud').checked = cfg.showHud !== false
+    document.getElementById('showHex').checked = cfg.showHex !== false
+    document.getElementById('showGrid').checked = cfg.showGrid !== false
+    document.getElementById('voice').checked = cfg.voice !== false
+  }
+
+  function persist(patch) {
+    var next = Object.assign({}, saved, patch)
+    try { localStorage.setItem('dsh86-preview', JSON.stringify(next)) } catch (e) { /* noop */ }
+    location.reload()
+  }
+
+  paint()
+
+  document.getElementById('autoPlay').addEventListener('change', function (e) {
+    persist({ autoPlay: e.target.value })
+  })
+  document.getElementById('length').addEventListener('change', function (e) {
+    persist({ length: e.target.value })
+  })
+  document.getElementById('speed').addEventListener('change', function (e) {
+    persist({ speed: Number(e.target.value) })
+  })
+  document.getElementById('portrait').addEventListener('change', function (e) {
+    persist({ portrait: Number(e.target.value) })
+  })
+  document.getElementById('scene').addEventListener('change', function (e) {
+    persist({ scene: e.target.value })
+  })
+  ;['showHud', 'showHex', 'showGrid', 'voice'].forEach(function (id) {
+    document.getElementById(id).addEventListener('change', function (e) {
+      var patch = {}
+      patch[id] = e.target.checked
+      persist(patch)
+    })
+  })
+
+  document.getElementById('replay').addEventListener('click', function () {
+    try {
+      localStorage.removeItem('dsh86-preview-shown')
+      sessionStorage.removeItem('dsh-86-startup:shown')
+    } catch (e) { /* noop */ }
+    location.reload()
+  })
+  document.getElementById('skip').addEventListener('click', function () {
+    if (window.__DSH_86_STARTUP_API__) window.__DSH_86_STARTUP_API__.skip()
+  })
+  document.getElementById('toggle').addEventListener('click', function () {
+    document.getElementById('console').classList.toggle('collapsed')
+    this.textContent = document.getElementById('console').classList.contains('collapsed') ? '+' : '—'
+  })
+})()
+</script>
+<script src="../lib/splash.js"></script>
+</body>
+</html>

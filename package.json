@@ -1,0 +1,69 @@
+{
+  "name": "dsh-86-startup",
+  "version": "1.0.0",
+  "private": true,
+  "description": "86 -不存在的战区- 主题开机动画 for DeepSeek Harness: 86 lockup, Para-RAID boot sequence, tactical plate, handler HUD, hex rain, lycoris finale.",
+  "license": "MIT",
+  "type": "module",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "startup",
+    "splash",
+    "boot-animation",
+    "86",
+    "eighty-six"
+  ],
+  "main": "./lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "lib",
+    "assets",
+    "preview",
+    "docs",
+    "tools",
+    "test/host.mjs",
+    "test/shoot.mjs",
+    "cordis.patch.yml",
+    "icon.svg",
+    "README.md",
+    "LICENSE",
+    "install.sh"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [],
+      "immediately": true
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": ">=4.0.0-rc <5"
+  },
+  "engines": {
+    "node": "^22.15.0 || >=24.0.0"
+  },
+  "scripts": {
+    "check": "node --check lib/index.js && node --check lib/splash.js && node --check lib/client.js",
+    "test": "node test/host.mjs",
+    "shots": "node test/shoot.mjs"
+  },
+  "author": "Jonathan Chang",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JonathanChang-alt/dsh-86-startup.git"
+  },
+  "homepage": "https://github.com/JonathanChang-alt/dsh-86-startup",
+  "bugs": {
+    "url": "https://github.com/JonathanChang-alt/dsh-86-startup/issues"
+  }
+}
